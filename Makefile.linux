@@ -1,0 +1,7 @@
+OUTDIR	= out
+BIN     = $(OUTDIR)/toh.out
+linux: clean 
+	gcc src/*.c -g -lGL -lGLU -lglut -o $(BIN)
+
+clean:
+	rm $(OUTDIR)/* -rf
