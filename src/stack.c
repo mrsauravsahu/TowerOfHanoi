@@ -74,3 +74,14 @@ void destroy(Stack *this)
     this->top = NULL;
     this->count = 0;
 }
+
+// Traverse the stack
+void traverse(Stack *this, void (*func)(TYPE *))
+{
+    Node *top = this->top;
+    while (top != NULL)
+    {
+        func(&(top->info));
+        top = top->ptr;
+    }
+}

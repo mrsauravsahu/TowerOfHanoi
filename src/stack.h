@@ -1,10 +1,10 @@
 #ifndef STACK_TOH_H
 #define STACK_TOH_H
 
-#include "disk.h"
 #include <malloc.h>
+#include "disk.h"
+#include "types.h"
 #define TYPE Disk
-
 
 typedef struct __Node__
 {
@@ -22,10 +22,9 @@ Stack *new_Stack(int);
 TYPE peep(Stack *);
 void push(Stack *, TYPE);
 TYPE pop(Stack *);
-void empty();
-void display();
-void destroy();
-int count();
-void create();
+bool isEmpty(Stack *);
+void traverse(Stack *, void (*func)(TYPE *));
+void destroy(Stack *);
+int count(Stack *);
 
 #endif
