@@ -2,6 +2,7 @@
 #include "stack.h"
 #include "window.h"
 #include "disk.h"
+#include "constants.h"
 
 TOH *new_TOH(int n)
 {
@@ -16,9 +17,17 @@ TOH *new_TOH(int n)
 
 void setupGame(TOH *t)
 {
-    int i = 0;
+    double i = 0;
+    //Outer radius
+    double or = 280;
+    //y Coordinate
+    double y = 50;
+    //Height
+    double height = (600.0 / (t->disks) < 100) ? 600.0 / (t->disks) : 100;
     for (; i < t->disks; ++i)
     {
-        push(t->source, *(new_Disk()));
+        push(t->source, *(new_Disk(SourceX, y, or, height)));
+        y += height;
+        or -= (or *0.2);
     }
 }

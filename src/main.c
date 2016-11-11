@@ -6,12 +6,14 @@ void render()
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3d(0, 0, 1);
     traverse(root->source, drawDisk);
+    traverse(root->aux, drawDisk);
+    traverse(root->dest, drawDisk);
     glutSwapBuffers();
 }
 
 int main(int argc, char **argv)
 {
-    root = new_TOH(3);
+    root = new_TOH(10);
     setupGame(root);
 
     glutInit(&argc, argv);

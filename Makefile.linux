@@ -5,3 +5,4 @@ linux: clean
 
 clean:
 	rm $(OUTDIR)/* -rf
+	rm $(OUTDIR)/.f* -rf

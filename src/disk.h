@@ -10,7 +10,7 @@ typedef struct
     Point3 baseCenter;
 } Disk;
 
-Disk *new_Disk();
+Disk *new_Disk(double, double, double, double);
 void drawDisk(Disk *);
 
 #endif
