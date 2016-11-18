@@ -13,7 +13,8 @@
         {
             "name": "Linux",
             "includePath": [
-                "/usr/include"
+                "/usr/include",
+                "/all-drives/Data/MiniProjects/TowerOfHanoi/include"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,

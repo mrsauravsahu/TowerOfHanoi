@@ -1,8 +1,18 @@
-LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW32/lib" -static-libstdc++ -static-libgcc "C:/Program Files (x86)/Dev-Cpp/MinGW32/lib/libopengl32.a" "C:/Program Files (x86)/Dev-Cpp/MinGW32/lib/libglu32.a" "C:/Program Files (x86)/Dev-Cpp/MinGW32/lib/libglut32.a" 
-INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW32/include"
-CFLAGS   = $(INCS) -lglu32 -lglut32 -lopengl32
+INCS    = -I"C:/Program Files (x86)/Dev-Cpp/MinGW32/include"
+MYHEADERS = -I"F:/MiniProjects/TowerOfHanoi/include"
+CFLAGS  = $(MYHEADERS) $(INCS) -lglu32 -lglut32 -lopengl32
 OUTDIR	= out
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW32/lib" -static-libstdc++ -static-libgcc "C:/Program Files (x86)/Dev-Cpp/MinGW32/lib/libopengl32.a" "C:/Program Files (x86)/Dev-Cpp/MinGW32/lib/libglu32.a" "C:/Program Files (x86)/Dev-Cpp/MinGW32/lib/libglut32.a" 
+PROJECTBASE = src
 BIN     = $(OUTDIR)/toh.exe
+EXTRAS = --std=c99
 
-win32:
-	gcc.exe src/*.c -o $(BIN) $(CFLAGS)
+win32: models viewmodels main
+	gcc $(CFLAGS) $(OUTDIR)/*.o -g -o $(BIN) $(EXTRAS) $(LIBS)
+
+models:
+	gcc $(CFLAGS) $(PROJECTBASE)/model/*.c -o $(OUTDIR)/models.o 
+viewmodels:
+	gcc $(CFLAGS) $(PROJECTBASE)/viewmodel/*.c -o $(OUTDIR)/viewmodels.o
+main:
+	gcc $(CFLAGS) $(PROJECTBASE)/*.c -o $(OUTDIR)/main.o

@@ -5,7 +5,6 @@
 
 typedef struct
 {
-
     void (*display)();
 } Page;
 

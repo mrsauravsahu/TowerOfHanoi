@@ -2,8 +2,8 @@
 #define STACK_TOH_H
 
 #include <malloc.h>
-#include "disk.h"
-#include "types.h"
+#include <disk.h>
+#include <types.h>
 #define TYPE Disk
 
 typedef struct __Node__

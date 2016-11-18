@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "stack.h"
-#include "types.h"
+#include <stack.h>
+#include <types.h>
 
 // Allocate memory for a new Stack on the heap
 Stack *new_Stack(int size)
@@ -40,11 +40,12 @@ void push(Stack *this, TYPE data)
 TYPE pop(Stack *this)
 {
     Node *tmp = this->top;
+    TYPE info = tmp->info;
     tmp = tmp->ptr;
     free(this->top);
     this->top = tmp;
     this->count--;
-    return tmp->info;
+    return info;
 }
 
 // Peep the topmost element on the stack

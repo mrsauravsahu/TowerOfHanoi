@@ -1,29 +1,36 @@
+#include <toh.h>
+#include <disk.h>
+#include <stack.h>
+#include <stdio.h>
+#include <gamePageViewModel.h>
 #include <GL/glut.h>
-#include "toh.h"
-TOH *root;
-void render()
+
+extern GamePageViewModel *vm;
+void choice(int ch)
 {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glColor3d(0, 0, 1);
-    traverse(root->source, drawDisk);
-    traverse(root->aux, drawDisk);
-    traverse(root->dest, drawDisk);
-    glutSwapBuffers();
+    switch (ch)
+    {
+    case 1:
+        vm->toh->game->solve(vm->toh->game);
+        break;
+    }
 }
 
 int main(int argc, char **argv)
 {
-    root = new_TOH(10);
-    setupGame(root);
-
+    vm = new_gamePageViewModel(4);
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-    glutInitWindowSize(root->window->width, root->window->height);
-    glutInitWindowPosition(root->window->positionX, root->window->positionY);
+    glutInitWindowSize(vm->toh->window->width, vm->toh->window->height);
+    glutInitWindowPosition(vm->toh->window->positionX, vm->toh->window->positionY);
     glutCreateWindow("Tower of Hanoi");
-    gluOrtho2D(0, root->window->width, 0, root->window->height);
-    glutDisplayFunc(render);
+    gluOrtho2D(vm->toh->window->left, vm->toh->window->right, vm->toh->window->bottom, vm->toh->window->top);
+    glutDisplayFunc(vm->render);
     glClearColor(1, 1, 1, 1);
+    //glutFullScreen();
+    glutCreateMenu(choice);
+    glutAddMenuEntry("Solve", 1);
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
     glutMainLoop();
     return 0;
 }
