@@ -1,18 +1,24 @@
-#ifndef GAMEPAGE_TOH_H
-#define GAMEPAGE_TOH_H
+#ifndef GAMEPAGEVIEWMODEL_TOH_H
+#define GAMEPAGEVIEWMODEL_TOH_H
 
+#include <stack.h>
+#include <window.h>
+#include <game.h>
 #include <malloc.h>
-#include <toh.h>
 
-struct __GamePage__
+typedef struct
 {
-  TOH *toh;
+  Game *game;
+  Window *window;
+  int disks;
+  double height;
   void (*render)(void);
-};
+} GamePageViewModel;
 
-typedef struct __GamePage__ GamePageViewModel;
 void render_gamePage(void);
 GamePageViewModel *new_gamePageViewModel(int n);
+void setupGame(GamePageViewModel *);
 
 GamePageViewModel *vm;
+
 #endif

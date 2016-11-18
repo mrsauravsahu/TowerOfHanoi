@@ -30,13 +30,13 @@ void move(int x)
             base.x = DestX;
             break;
         }
-        if (isEmpty(vm->toh->game->poles[to]) == false)
-            base.y = peep(vm->toh->game->poles[to]).baseCenter.y + vm->toh->game->height;
-        Disk moving = pop(vm->toh->game->poles[from]);
+        if (isEmpty(vm->game->poles[to]) == false)
+            base.y = peep(vm->game->poles[to]).baseCenter.y + vm->game->height;
+        Disk moving = pop(vm->game->poles[from]);
         moving.baseCenter.x = base.x;
         moving.baseCenter.y = base.y;
         moving.baseCenter.z = base.z;
-        push(vm->toh->game->poles[to], moving);
+        push(vm->game->poles[to], moving);
         glutPostRedisplay();
         glutTimerFunc(1000, move, x + 1);
     }
