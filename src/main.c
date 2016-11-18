@@ -18,7 +18,7 @@ void choice(int ch)
 
 int main(int argc, char **argv)
 {
-    vm = new_gamePageViewModel(4);
+    vm = new_gamePageViewModel(3);
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(vm->toh->window->width, vm->toh->window->height);

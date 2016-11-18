@@ -10,10 +10,10 @@ MODELSRC = $(wildcard src/model/*.c)
 MODEL = $(MODELSRC:.c=.o)
 VIEWMODELSRC = $(wildcard src/viewmodel/*.c)
 VIEWMODEL = $(VIEWMODELSRC:.c=.o)
-
 MODULES = out/*.o
+
 all: linux
-linux: $(BIN)
+linux: $(BIN) clean
 
 $(BIN): $(LIB) $(MODEL) $(VIEWMODEL)
 	gcc -g -I$(INCLUDE) src/main.c $(MODULES) -o $(BIN) $(LINK)
@@ -21,7 +21,8 @@ $(BIN): $(LIB) $(MODEL) $(VIEWMODEL)
 %.o: %.c
 	gcc -g -c $^ -I$(INCLUDE) $(CFLAGS) -o out/$(basename $(<F)).o
 clean:
-	rm $(OUTDIR)/* -rf
+	rm $(OUTDIR)/*.o -rf
 	rm $(OUTDIR)/.f* -rf
 
-distclean: clean
+cleano:
+	rm out/*.o
