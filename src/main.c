@@ -6,7 +6,7 @@
 #include <gamePageViewModel.h>
 #include <GL/glut.h>
 
-extern GamePageViewModel *vm;
+GamePageViewModel *vm;
 void choice(int ch)
 {
     switch (ch)

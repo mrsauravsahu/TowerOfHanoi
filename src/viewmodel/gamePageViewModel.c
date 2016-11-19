@@ -7,6 +7,7 @@
 #include <constants.h>
 #include <ai.h>
 
+extern GamePageViewModel *vm;
 void render_gamePage(void)
 {
   glClear(GL_COLOR_BUFFER_BIT);
@@ -23,6 +24,7 @@ GamePageViewModel *new_gamePageViewModel(int n, void (*solve)(Game *))
   gm->height = ((600.0 / n) < 80) ? 600.0 / (n) : 80;
   gm->game = new_Game(n, solve, gm->height);
   gm->window = new_Window(0, 0, 810, 675);
+  gm->menuSystem = new_Menu();
   setupGame(gm);
   return gm;
 }

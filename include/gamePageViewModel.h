@@ -1,6 +1,7 @@
 #ifndef GAMEPAGEVIEWMODEL_TOH_H
 #define GAMEPAGEVIEWMODEL_TOH_H
 
+#include <menu.h>
 #include <stack.h>
 #include <window.h>
 #include <game.h>
@@ -13,12 +14,11 @@ typedef struct
   int disks;
   double height;
   void (*render)(void);
+  Menu *menuSystem;
 } GamePageViewModel;
 
 void render_gamePage(void);
 GamePageViewModel *new_gamePageViewModel(int n, void (*render)(Game *));
 void setupGame(GamePageViewModel *);
-
-GamePageViewModel *vm;
 
 #endif

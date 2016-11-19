@@ -4,59 +4,19 @@
 #include <constants.h>
 #include <gamePageViewModel.h>
 
-int menuId;
-int optionsCount = 0;
-bool created = false;
-
+extern GamePageViewModel *vm;
 const char *moves[3][3] = {
     "", "Source -> Auxilliary", "Source -> Destination",
     "Auxilliary -> Source", "", "Auxilliary -> Destination",
     "Destination -> Source", "Destination -> Auxilliary", ""};
 
-void createMenu()
+void menuOptions(int move)
 {
-    menuId = glutCreateMenu(menuOptions);
-    glutAttachMenu(GLUT_RIGHT_BUTTON);
-    created = true;
-}
-void cleanOptions()
-{
-    glutSetMenu(menuId);
-    for (int i = 0; i < optionsCount; ++i)
-        glutRemoveMenuItem(i + 1);
-}
-void setValidOptions(Game *game)
-{
-    glutDestroyMenu(menuId);
-    createMenu();
-    optionsCount = 0;
-    int count[3] = {0};
-    for (int i = 0; i < 3; ++i)
-    {
-        if (isEmpty(game->poles[i]))
-            count[i] = -1;
-        else
-            count[i] = peep(game->poles[i]).id;
-    }
-    glutSetMenu(menuId);
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            if (i == j)
-                continue;
-            if (count[i] > count[j])
-            {
-                glutAddMenuEntry(moves[i][j], (i + 1) * 10 + j + 1);
-                optionsCount++;
-            }
-            /*else if (count[i] < count[j])
-            {
-                glutAddMenuEntry(moves[j][i], (j + 1) * 10 + i + 1);
-                optionsCount++;
-            }*/
-        }
-    }
+    Pole from, to;
+    from = move / 10 - 1;
+    to = move % 10 - 1;
+    mymove(vm->game, from, to);
+    setValidOptions(vm->menuSystem);
 }
 
 void mymove(Game *game, Pole from, Pole to)
@@ -84,19 +44,41 @@ void mymove(Game *game, Pole from, Pole to)
     glutPostRedisplay();
 }
 
-void menuOptions(int move)
+void solveHuman()
 {
-    Pole from, to;
-    from = move / 10 - 1;
-    to = move % 10 - 1;
-    mymove(vm->game, from, to);
-    setValidOptions(vm->game);
+    if (vm->menuSystem->created == false)
+    {
+        vm->menuSystem->menuFunction = menuOptions;
+        vm->menuSystem->created = true;
+    }
+    else
+    {
+        destroyMenu(vm->menuSystem);
+    }
+    createMenu(vm->menuSystem);
+    setValidOptions(vm->menuSystem);
 }
-
-void solveHuman(Game *game)
+void setValidOptions(Menu *menu)
 {
-    if (created == true)
-        glutDestroyMenu(menuId);
-    createMenu();
-    setValidOptions(game);
+    destroyMenu(menu);
+    createMenu(menu);
+    int count[3] = {0};
+    for (int i = 0; i < 3; ++i)
+    {
+        if (isEmpty(vm->game->poles[i]))
+            count[i] = -1;
+        else
+            count[i] = peep(vm->game->poles[i]).id;
+    }
+    glutSetMenu(menu->menuId);
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (i == j)
+                continue;
+            if (count[i] > count[j])
+                glutAddMenuEntry(moves[i][j], (i + 1) * 10 + j + 1);
+        }
+    }
 }

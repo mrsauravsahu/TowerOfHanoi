@@ -8,6 +8,7 @@
 #include <array.h>
 #include <gamePageViewModel.h>
 
+extern GamePageViewModel *vm;
 Array2 *solution;
 int i = 0;
 void move(int x)
@@ -38,7 +39,7 @@ void move(int x)
         moving.baseCenter.z = base.z;
         push(vm->game->poles[to], moving);
         glutPostRedisplay();
-        glutTimerFunc(1000, move, x + 1);
+        glutTimerFunc(50, move, x + 1);
     }
 }
 

@@ -2,10 +2,12 @@
 #define HUMAN_TOH_H
 
 #include <game.h>
+#include <menu.h>
 
-void setValidOptions(Game *);
-void mymove(Game *, Pole, Pole);
-void solveHuman(Game *);
 void menuOptions(int);
+void setValidOptions(Menu *);
+void mymove(Game *, Pole, Pole);
+void solveHuman();
+
 
 #endif
