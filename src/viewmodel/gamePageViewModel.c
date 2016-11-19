@@ -15,13 +15,13 @@ void render_gamePage(void)
   glutSwapBuffers();
 }
 
-GamePageViewModel *new_gamePageViewModel(int n)
+GamePageViewModel *new_gamePageViewModel(int n, void (*solve)(Game *))
 {
   GamePageViewModel *gm = (GamePageViewModel *)malloc(sizeof(GamePageViewModel));
   gm->render = render_gamePage;
   gm->disks = n;
   gm->height = ((600.0 / n) < 80) ? 600.0 / (n) : 80;
-  gm->game = new_Game(n, solve_ai, gm->height);
+  gm->game = new_Game(n, solve, gm->height);
   gm->window = new_Window(0, 0, 810, 675);
   setupGame(gm);
   return gm;

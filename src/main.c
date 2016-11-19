@@ -1,3 +1,4 @@
+#include <ai.h>
 #include <disk.h>
 #include <stack.h>
 #include <stdio.h>
@@ -17,7 +18,7 @@ void choice(int ch)
 
 int main(int argc, char **argv)
 {
-    vm = new_gamePageViewModel(3);
+    vm = new_gamePageViewModel(3, solve_ai);
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(vm->window->width, vm->window->height);
@@ -26,7 +27,6 @@ int main(int argc, char **argv)
     gluOrtho2D(vm->window->left, vm->window->right, vm->window->bottom, vm->window->top);
     glutDisplayFunc(vm->render);
     glClearColor(1, 1, 1, 1);
-    //glutFullScreen();
     glutCreateMenu(choice);
     glutAddMenuEntry("Solve", 1);
     glutAttachMenu(GLUT_RIGHT_BUTTON);

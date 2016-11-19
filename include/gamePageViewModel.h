@@ -16,7 +16,7 @@ typedef struct
 } GamePageViewModel;
 
 void render_gamePage(void);
-GamePageViewModel *new_gamePageViewModel(int n);
+GamePageViewModel *new_gamePageViewModel(int n, void (*render)(Game *));
 void setupGame(GamePageViewModel *);
 
 GamePageViewModel *vm;
