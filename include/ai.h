@@ -3,6 +3,6 @@
 
 #include <game.h>
 
-void solve_ai(Game *);
+void solveAI(Game *);
 
 #endif

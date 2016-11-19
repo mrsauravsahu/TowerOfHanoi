@@ -1,4 +1,5 @@
 #include <ai.h>
+#include <human.h>
 #include <disk.h>
 #include <stack.h>
 #include <stdio.h>
@@ -18,7 +19,7 @@ void choice(int ch)
 
 int main(int argc, char **argv)
 {
-    vm = new_gamePageViewModel(3, solve_ai);
+    vm = new_gamePageViewModel(3, solveHuman);
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(vm->window->width, vm->window->height);

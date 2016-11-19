@@ -5,13 +5,14 @@
 
 typedef struct
 {
+    int id;
     double innerRadius, outerRadius;
     double height;
     Point3 baseCenter;
     Color color;
 } Disk;
 
-Disk *new_Disk(double, double, double, double, Color);
+Disk *new_Disk(int, double, double, double, double, Color);
 void drawDisk(Disk *);
 
 #endif

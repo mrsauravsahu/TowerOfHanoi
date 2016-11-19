@@ -60,7 +60,7 @@ void towers(Game *game, int num, Pole from, Pole to, Pole aux)
     towers(game, num - 1, aux, to, from);
 }
 
-void solve_ai(Game *game)
+void solveAI(Game *game)
 {
     int moves = (int)(pow(2, game->disks)) - 1;
     solution = new_Array2(moves, 2);

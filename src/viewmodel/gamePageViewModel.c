@@ -29,19 +29,20 @@ GamePageViewModel *new_gamePageViewModel(int n, void (*solve)(Game *))
 
 void setupGame(GamePageViewModel *t)
 {
-  double i = 0;
+  //Disk ID
+  int id = 0;
   //Outer radius
   double or = 280;
   //y Coordinate
   double y = 50;
   //Color for the disk
   Color col;
-  for (; i < t->disks; ++i)
+  for (int i = 0; i < t->disks; ++i)
   {
     col[0] = (rand() % 200) / 255.0;
     col[1] = (rand() % 200) / 255.0;
     col[2] = (rand() % 200) / 255.0;
-    push(t->game->poles[Source], *(new_Disk(SourceX, y, or, t->height, col)));
+    push(t->game->poles[Source], *(new_Disk(id++, SourceX, y, or, t->height, col)));
     y += t->height;
     or -= (270 / t->disks);
   }

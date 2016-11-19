@@ -4,10 +4,10 @@
 #include <disk.h>
 #include <types.h>
 
-Disk *new_Disk(double x, double y, double outerRadius, double height, Color color)
+Disk *new_Disk(int id, double x, double y, double outerRadius, double height, Color color)
 {
     Disk *d = (Disk *)malloc(sizeof(Disk));
-    
+    d->id = id;
     Point3 pos;
     pos.x = x;
     pos.y = y;
