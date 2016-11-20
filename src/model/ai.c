@@ -5,7 +5,7 @@
 #include <GL/glut.h>
 #include <disk.h>
 #include <math.h>
-#include <array.h>
+#include <array2.h>
 #include <gamePageViewModel.h>
 
 extern GamePageViewModel *vm;

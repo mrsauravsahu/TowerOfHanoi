@@ -1,4 +1,4 @@
-#include <array.h>
+#include <array2.h>
 #include <malloc.h>
 
 Array2 *new_Array2(int row, int col)
