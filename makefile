@@ -14,13 +14,15 @@ LIBSRC          = $(wildcard lib/*.c)
 LIB             = $(LIBSRC:.c=.o)
 MODELSRC        = $(wildcard src/model/*.c)
 MODEL           = $(MODELSRC:.c=.o)
+VIEWSRC        = $(wildcard src/view/*.c)
+VIEW           = $(VIEWSRC:.c=.o)
 VIEWMODELSRC    = $(wildcard src/viewmodel/*.c)
 VIEWMODEL       = $(VIEWMODELSRC:.c=.o)
 MODULES         = $(OUTDIR)/*.o
 
 all: $(BIN) clean
 
-$(BIN): $(LIB) $() $(MODEL) $(VIEWMODEL)
+$(BIN): $(LIB) $(MODEL) $(VIEW) $(VIEWMODEL)
 	gcc -g $(INCLUDE) src/main.c $(MODULES) -o $(BIN) $(CFLAGS) $(LIBS)
 
 %.o: %.c

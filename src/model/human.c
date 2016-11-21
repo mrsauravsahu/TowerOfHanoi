@@ -1,10 +1,14 @@
-#include <human.h>
 #include <GL/glut.h>
-#include <stack.h>
-#include <constants.h>
-#include <gamePageViewModel.h>
+#include <stdio.h>
+
+#include "human.h"
+#include "message.h"
+#include "stack.h"
+#include "constants.h"
+#include "gamePageViewModel.h"
 
 extern GamePageViewModel *vm;
+int movesCount = 0;
 const char *moves[3][3] = {
     "", "Source -> Auxilliary", "Source -> Destination",
     "Auxilliary -> Source", "", "Auxilliary -> Destination",
@@ -16,6 +20,13 @@ void menuOptions(int move)
     from = move / 10 - 1;
     to = move % 10 - 1;
     mymove(vm->game, from, to);
+    movesCount++;
+    if(vm->game->poles[Destination]->count == vm->disks)
+    {
+        char msg[50];
+        sprintf(msg, "You took %d moves to solve the problem!", movesCount);
+        new_Message(msg);
+    }
     setValidOptions(vm->menuSystem);
 }
 
