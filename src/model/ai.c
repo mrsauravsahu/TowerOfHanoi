@@ -39,7 +39,7 @@ void move(int x)
         moving.baseCenter.z = base.z;
         push(vm->game->poles[to], moving);
         glutPostRedisplay();
-        glutTimerFunc(50, move, x + 1);
+        glutTimerFunc(1000, move, x + 1);
     }
 }
 

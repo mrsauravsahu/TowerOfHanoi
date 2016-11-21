@@ -1,10 +1,13 @@
-#include <ai.h>
-#include <human.h>
-#include <disk.h>
-#include <stack.h>
-#include <stdio.h>
-#include <gamePageViewModel.h>
 #include <GL/glut.h>
+#include <stdio.h>
+
+#include "ai.h"
+#include "human.h"
+#include "disk.h"
+#include "stack.h"
+#include "gamePageViewModel.h"
+#include "parser.h"
+#include "quit.h"
 
 GamePageViewModel *vm;
 void choice(int ch)
@@ -19,7 +22,7 @@ void choice(int ch)
 
 int main(int argc, char **argv)
 {
-    vm = new_gamePageViewModel(3, solveHuman);
+    vm = parse(argc, argv);
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(vm->window->width, vm->window->height);
@@ -32,5 +35,7 @@ int main(int argc, char **argv)
     glutAddMenuEntry("Solve", 1);
     glutAttachMenu(GLUT_RIGHT_BUTTON);
     glutMainLoop();
-    return 0;
+
+    //Unreachable Code
+    quit(EXIT_SUCCESS, "");
 }
