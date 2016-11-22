@@ -85,7 +85,7 @@ int getNumberOfDisks()
     int disks;
     do
     {
-        printf("\nEnter number of disks [1 - 10]: ");
+        printf("Enter number of disks [1 - 10]: ");
         scanf("%d", &disks);
     } while (disks < 1 || disks > 10);
     return disks;

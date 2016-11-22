@@ -8,5 +8,5 @@ typedef struct
     int left, right, top, bottom;
 } Window;
 
-Window *new_Window(int, int, int, int);
+Window *new_Window(int, int, int);
 #endif

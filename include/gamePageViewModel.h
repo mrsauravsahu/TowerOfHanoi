@@ -14,6 +14,7 @@ typedef struct
   int disks;
   double height;
   void (*render)(void);
+  void (*reshape)(int, int);
   Menu *menuSystem;
 } GamePageViewModel;
 
