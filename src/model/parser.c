@@ -35,16 +35,24 @@ GamePageViewModel *parse(int argc, char **argv)
     else
     {
         modeString = argv[1];
+        toUpper(modeString);
         disks = atoi(argv[2]);
-        if (disks < 0 || disks > 10)
+        if (disks < 1 || disks > 10)
         {
             printf("You have entered an invalid number. Try again...\n");
             disks = getNumberOfDisks();
         }
-        if (strcmp(modeString, "human") != 0 && strcmp(modeString, "ai") != 0)
+        if (strcmp(modeString, "HUMAN") != 0 && strcmp(modeString, "AI") != 0)
         {
             printf("You have entered an invalid mode. Try again...\n");
             mode = getMode();
+        }
+        else
+        {
+            if (strcmp(modeString, "HUMAN") == 0)
+                mode = Human;
+            else
+                mode = AI;
         }
     }
     switch (mode)
@@ -53,9 +61,6 @@ GamePageViewModel *parse(int argc, char **argv)
         return new_gamePageViewModel(disks, solveHuman);
     case AI:
         return new_gamePageViewModel(disks, solveAI);
-    default:
-        //Unreachable Code
-        quit(EXIT_SUCCESS, "\n");
     }
 }
 
@@ -82,6 +87,6 @@ int getNumberOfDisks()
     {
         printf("\nEnter number of disks [1 - 10]: ");
         scanf("%d", &disks);
-    } while (disks < 0 || disks > 10);
+    } while (disks < 1 || disks > 10);
     return disks;
 }
