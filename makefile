@@ -20,7 +20,7 @@ VIEWMODELSRC    = $(wildcard src/viewmodel/*.c)
 VIEWMODEL       = $(VIEWMODELSRC:.c=.o)
 MODULES         = $(OUTDIR)/*.o
 
-all: $(BIN) clean
+all: clean $(BIN) cleano 
 
 $(BIN): $(LIB) $(MODEL) $(VIEW) $(VIEWMODEL)
 	gcc -g $(INCLUDE) src/main.c $(MODULES) -o $(BIN) $(CFLAGS) $(LIBS)
@@ -32,8 +32,10 @@ stringopstest:
 	gcc -g -Iinclude lib/stringops.c tests/stringopstest.c -o out/tests/stringopstest.out
 
 clean:
+	rm $(OUTDIR) -r
+	mkdir out
+
+cleano:
 	rm $(OUTDIR)/*.o -rf
 	rm $(OUTDIR)/.f* -rf
 	rm $(OUTDIR)/tests/.f* -rf
-cleano:
-	rm out/*.o
