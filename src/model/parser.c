@@ -24,15 +24,20 @@ GamePageViewModel *parse(int argc, char **argv)
     char *modeString;
     bool renderMode = true;
     int disks;
-    if (argc < 3)
-    {
-        showHelp();
-        quit(EXIT_FAILURE, "\n");
-    }
     if (argc == 1)
     {
-        mode = getMode();
-        disks = getNumberOfDisks();
+        showHelp();
+        printf("\nDo you want to give arguments now?\n");
+        char rep[10];
+        scanf("%s", rep);
+        toUpper(rep);
+        if (!strcmp(rep, "YES") || !strcmp(rep, "Y"))
+        {
+            mode = getMode();
+            disks = getNumberOfDisks();
+        }
+        else
+            quit(EXIT_SUCCESS, "");
     }
     else if (argc >= 3)
     {
@@ -77,7 +82,7 @@ Mode getMode()
     char mode[10];
     do
     {
-        printf("Enter mode: [human, ai]: ");
+        printf("Enter mode [human, ai]: ");
         scanf("%s", mode);
         toUpper(mode);
     } while (strcmp(mode, "HUMAN") && strcmp(mode, "AI"));

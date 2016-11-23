@@ -3,7 +3,7 @@
 #include "types.h"
 #include "gamePageViewModel.h"
 
-bool isFullScreen = true;
+bool isFullScreen = false;
 GamePageViewModel *vm;
 void init(void)
 {
@@ -25,7 +25,6 @@ void init(void)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glClearColor(1, 1, 1, 1);
-    glutFullScreen();
 }
 
 void toggleFullScreen()
