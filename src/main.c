@@ -18,6 +18,8 @@ void choice(int ch)
     {
     case 1:
         glutRemoveMenuItem(1);
+        if (vm->game->solve == solveHuman)
+            glutAttachMenu(GLUT_LEFT_BUTTON);
         vm->game->solve(vm->game);
         break;
     case 2:
