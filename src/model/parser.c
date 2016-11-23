@@ -41,7 +41,6 @@ GamePageViewModel *parse(int argc, char **argv)
         disks = atoi(argv[2]);
         char *renderModeString = argv[3];
         toUpper(renderModeString);
-
         if (disks < 1 || disks > 10)
         {
             printf("You have entered an invalid number. Try again...\n");
