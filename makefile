@@ -23,15 +23,14 @@ MODULES         = *.o
 all: $(BIN) clean
 
 $(BIN): $(LIB) $(MODEL) $(VIEW) $(VIEWMODEL)
-	gcc -g $(INCLUDE) src/main.c $(MODULES) -o $(BIN) $(CFLAGS) $(LIBS)
+	gcc $(INCLUDE) src/main.c $(MODULES) -o $(BIN) $(CFLAGS) $(LIBS)
 
 %.o: %.c
-	gcc -g -c $^ $(CFLAGS) -o $(basename $(<F)).o --std=c99
+	gcc -c $^ $(CFLAGS) -o $(basename $(<F)).o --std=c99
 
 stringopstest:
-	gcc -g -Iinclude lib/stringops.c tests/stringopstest.c -o tests/stringopstest.out
+	gcc -Iinclude lib/stringops.c tests/stringopstest.c -o tests/stringopstest.out
 
 clean:
 	rm *.o -rf
 	rm .f* -rf
-	rm tests/.f* -rf
