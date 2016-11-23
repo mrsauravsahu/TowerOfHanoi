@@ -8,34 +8,30 @@
 #include "gamePageViewModel.h"
 #include "parser.h"
 #include "quit.h"
+#include "initialization.h"
 
-GamePageViewModel *vm;
+extern GamePageViewModel *vm;
+extern bool isFullScreen;
 void choice(int ch)
 {
     switch (ch)
     {
     case 1:
+        glutRemoveMenuItem(1);
         vm->game->solve(vm->game);
         break;
+    case 2:
+        toggleFullScreen();
+        glutPostRedisplay();
+        break;
+    case 3:
+        vm->renderMode = (vm->renderMode == true) ? false : true;
+        reshape();
+        glutPostRedisplay();
+        break;
+    case 4:
+        quit(EXIT_SUCCESS, "\n");
     }
-}
-
-void init(void)
-{
-    GLfloat light_ambient[] = {0.0, 0.0, 0.0, 1.0};
-    GLfloat light_diffuse[] = {1.0, 1.0, 1.0, 1.0};
-    GLfloat light_specular[] = {1.0, 1.0, 1.0, 1.0};
-    GLfloat light_position[] = {1.0, 1.0, 1.0, 0.0};
-
-    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_COLOR_MATERIAL);
 }
 
 int main(int argc, char **argv)
@@ -49,11 +45,13 @@ int main(int argc, char **argv)
     glutDisplayFunc(vm->render);
     glutReshapeFunc(vm->reshape);
     init();
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glClearColor(1, 1, 1, 1);
+
+    //Create initial Menu
     glutCreateMenu(choice);
     glutAddMenuEntry("Solve", 1);
+    glutAddMenuEntry("Toggle Fullscreen", 2);
+    glutAddMenuEntry("Toggle 2D/3D", 3);
+    glutAddMenuEntry("Quit", 4);
     glutAttachMenu(GLUT_RIGHT_BUTTON);
     glutMainLoop();
 

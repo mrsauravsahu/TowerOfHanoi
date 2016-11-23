@@ -7,26 +7,15 @@
 #include "disk.h"
 #include "constants.h"
 #include "ai.h"
+#include "initialization.h"
 
 extern GamePageViewModel *vm;
+void (*diskRender)(Disk *);
 
 void reshape_gamePage(int w, int h)
 {
   glViewport(0, 0, w, h);
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-
-  int myWidth = vm->window->right;
-  int myHeight = vm->window->top;
-
-  //Reshaping to accomodate for screen stretch does not look good, hence, commented
-  // if (w > h)
-  //   glOrtho(-myWidth * w / h, myWidth * w / h, -myHeight, myHeight, 0, 1000);
-  // else
-  //   glOrtho(-myWidth, myWidth, -myHeight * h / w, myHeight * h / w, 0, 1000);
-  
-  if(vm->renderMode ==true) glOrtho(-myWidth, myWidth, -myHeight, myHeight, 0, 1000);
-  else  gluOrtho2D(0, 900, 0, 750);
+  reshape();
   glutPostRedisplay();
 }
 
@@ -44,11 +33,12 @@ void drawPoles()
 
 void render_gamePage(void)
 {
-  void (*diskRender)();
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  glMatrixMode(GL_MODELVIEW);
   if (vm->renderMode == true)
   {
-    glMatrixMode(GL_MODELVIEW);
+
+    glPushMatrix();
     glLoadIdentity();
     glTranslatef(0, -100, 0);
     gluLookAt(450, 300 + vm->disks * 6, 500, 460, 300 - vm->disks * 4, 0, 0, 1, 0);
@@ -56,12 +46,14 @@ void render_gamePage(void)
   }
   else
   {
+    glPushMatrix();
     diskRender = drawDisk2D;
   }
 
   drawPoles();
   for (int i = 0; i < 3; ++i)
     traverse(vm->game->poles[i], diskRender);
+  glPopMatrix();
   glutSwapBuffers();
 }
 

@@ -39,8 +39,6 @@ GamePageViewModel *parse(int argc, char **argv)
         modeString = argv[1];
         toUpper(modeString);
         disks = atoi(argv[2]);
-        char *renderModeString = argv[3];
-        toUpper(renderModeString);
         if (disks < 1 || disks > 10)
         {
             printf("You have entered an invalid number. Try again...\n");
@@ -58,6 +56,11 @@ GamePageViewModel *parse(int argc, char **argv)
             else
                 mode = AI;
         }
+    }
+    if (argc > 3)
+    {
+        char *renderModeString = argv[3];
+        toUpper(renderModeString);
         renderMode = (strcmp(renderModeString, "3D") == 0) ? true : false;
     }
     switch (mode)

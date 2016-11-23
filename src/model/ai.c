@@ -66,5 +66,6 @@ void solveAI(Game *game)
     int moves = (int)(pow(2, game->disks)) - 1;
     solution = new_Array2(moves, 2);
     towers(game, game->disks, 0, 2, 1);
+    printf("\n");
     glutTimerFunc(0, move, 0);
 }
