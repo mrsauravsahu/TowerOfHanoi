@@ -13,6 +13,7 @@ typedef struct
 } Disk;
 
 Disk *new_Disk(int, double, double, double, double, Color);
-void drawDisk(Disk *);
+void drawDisk2D(Disk *);
+void drawDisk3D(Disk *);
 
 #endif

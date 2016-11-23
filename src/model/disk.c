@@ -22,7 +22,7 @@ Disk *new_Disk(int id, double x, double y, double outerRadius, double height, Co
     d->baseCenter = pos;
     return d;
 }
-void drawDisk(Disk *this)
+void drawDisk3D(Disk *this)
 {
     Point3 base = this->baseCenter;
     double rad = this->outerRadius;
@@ -56,4 +56,17 @@ void drawDisk(Disk *this)
     glPopMatrix();
 
     gluDeleteQuadric(q);
+}
+void drawDisk2D(Disk *this)
+{
+    Point3 base = this->baseCenter;
+    double rad = this->outerRadius;
+    double height = this->height;
+    glBegin(GL_QUADS);
+    glColor3dv(this->color);
+    glVertex2d(base.x - rad / 2, base.y);
+    glVertex2d(base.x - rad / 2, base.y + height);
+    glVertex2d(base.x + rad / 2, base.y + height);
+    glVertex2d(base.x + rad / 2, base.y);
+    glEnd();
 }

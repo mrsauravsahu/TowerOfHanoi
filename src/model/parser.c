@@ -9,6 +9,7 @@
 #include "parser.h"
 #include "stringops.h"
 #include "quit.h"
+#include "types.h"
 
 void showHelp()
 {
@@ -21,6 +22,7 @@ GamePageViewModel *parse(int argc, char **argv)
 {
     Mode mode;
     char *modeString;
+    bool renderMode = true;
     int disks;
     if (argc < 3)
     {
@@ -32,11 +34,14 @@ GamePageViewModel *parse(int argc, char **argv)
         mode = getMode();
         disks = getNumberOfDisks();
     }
-    else
+    else if (argc >= 3)
     {
         modeString = argv[1];
         toUpper(modeString);
         disks = atoi(argv[2]);
+        char *renderModeString = argv[3];
+        toUpper(renderModeString);
+
         if (disks < 1 || disks > 10)
         {
             printf("You have entered an invalid number. Try again...\n");
@@ -54,13 +59,14 @@ GamePageViewModel *parse(int argc, char **argv)
             else
                 mode = AI;
         }
+        renderMode = (strcmp(renderModeString, "3D") == 0) ? true : false;
     }
     switch (mode)
     {
     case Human:
-        return new_gamePageViewModel(disks, solveHuman);
+        return new_gamePageViewModel(disks, solveHuman, renderMode);
     case AI:
-        return new_gamePageViewModel(disks, solveAI);
+        return new_gamePageViewModel(disks, solveAI, renderMode);
     }
 }
 
