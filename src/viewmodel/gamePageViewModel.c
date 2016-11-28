@@ -8,6 +8,7 @@
 #include "constants.h"
 #include "ai.h"
 #include "initialization.h"
+#include "stringops.h"
 
 extern GamePageViewModel *vm;
 void (*diskRender)(Disk *);
@@ -23,12 +24,9 @@ void drawPoles()
 {
   //Pole Names
   glColor3i(0, 0, 0);
-  glRasterPos2f(SourceX, 700);
-  glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, 'S');
-  glRasterPos2f(AuxX, 700);
-  glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, 'A');
-  glRasterPos2f(DestX, 700);
-  glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, 'D');
+  drawString("SOURCE", SourceX, 700);
+  drawString("AUXILIARY", AuxX, 700);
+  drawString("DESTINATION", DestX, 700);
 }
 
 void render_gamePage(void)
